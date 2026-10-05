@@ -1,0 +1,35 @@
+{
+  "id": "terminal",
+  "name": "Terminal",
+  "version": "1.0.0",
+  "api": 4,
+  "icon": {
+    "light": "assets/icon-light.svg",
+    "dark": "assets/icon-dark.svg"
+  },
+  "description": "Your own shell in a tab, started in a folder you choose.",
+  "environment": {
+    "kind": "process"
+  },
+  "uses": [
+    "roots"
+  ],
+  "contributes": {
+    "main": {
+      "kind": "own",
+      "title": "Terminal"
+    }
+  },
+  "surfaces": [
+    {
+      "id": "terminal",
+      "kind": "view",
+      "title": "Terminal",
+      "entry": "views/terminal.js",
+      "placements": [
+        "rail",
+        "tab"
+      ]
+    }
+  ]
+}
