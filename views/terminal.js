@@ -13,7 +13,7 @@ import {
 const SHEET = `
 html, body, .terminal-root { height: 100%; margin: 0; }
 .terminal-glyph { display: block; flex: none; width: 1em; height: 1em; line-height: 1; }
-.hs-empty-view > .terminal-glyph { color: var(--dim); margin-bottom: 4px; }
+.hs-empty-view > .terminal-glyph { color: var(--dim); margin-bottom: var(--space); }
 .hs-shell .hs-button:active .terminal-glyph { transform: var(--press); opacity: var(--press-fade); }
 `;
 
