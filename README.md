@@ -12,5 +12,5 @@ Open Terminal from the rail and choose **Choose a folder**: your shell starts th
 
 ## What Terminal asks for
 
-- **A folder to start in.** The shell starts in a folder you gave the app.
+- **A folder to start in.** The shell starts in a folder you gave the app to read and change, because your shell can change what is in it.
 - **Your own access.** The commands you type run with your own access, as in any terminal, outside the sandbox of your apps' agents. What you type goes straight to the shell; the Terminal app never sees it.

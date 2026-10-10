@@ -17,7 +17,7 @@ html, body, .terminal-root { height: 100%; margin: 0; }
 .hs-shell .hs-button:active .terminal-glyph { transform: var(--press); opacity: var(--press-fade); }
 `;
 
-const app = new App({ name: 'Terminal', version: '1.0.0' }, {}, { autoResize: false });
+const app = new App({ name: 'Terminal', version: '1.0.1' }, {}, { autoResize: false });
 
 /** One request of the host, its result whole. */
 const call = (method, params = {}) => app.request({ method, params }, Answer);
@@ -54,12 +54,14 @@ const place = (cwd) =>
           ],
   });
 
-/** The pick of a folder, on the person's click. */
+/** The pick of a folder, on the person's click. The shell that starts
+ *  there is the person's own and can change what is in it, so the picker
+ *  and the app's settings page name read and change. */
 async function pick() {
   const { mount } = await call('hearthscale/roots/request', {
     purpose: 'Choose the folder your shell starts in',
     shape: 'folder',
-    mode: 'read',
+    mode: 'read-write',
   });
   if (mount) show(mount.path);
 }
