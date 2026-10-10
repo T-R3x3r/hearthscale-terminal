@@ -1,46 +1,16 @@
 # Terminal
 
-Your own shell in a tab, started in a folder you choose.
+Your own shell in a tab, beside your conversations: Windows PowerShell on Windows, and your login shell on macOS and Linux.
 
-Terminal is an ordinary Hearthscale app. Nothing in the platform knows its
-name; it installs from the Marketplace like any other app.
+## Get started
 
-## Working on it
+Open Terminal from the rail and choose **Choose a folder**: your shell starts there. Each Terminal tab starts its own shell, and closing the tab ends it.
 
-With a Hearthscale platform running on this machine:
+- **Ctrl+C** stops the running command. Copy with **Ctrl+Shift+C** and paste with **Ctrl+V**, or **⌘C** and **⌘V** on macOS.
+- Right-click for **Copy**, **Paste** and **Send selection to the composer**, which puts the selected lines above the composer, so you can ask an agent about an error.
+- A web address the shell prints is a link that opens in your system's browser.
 
-```
-hearthscale dev .
-```
+## What Terminal asks for
 
-links this folder into the running platform, picks up every change, and
-asks once in the window before any code runs.
-
-## The view
-
-Terminal shows one view, `views/terminal.js`, a module with no build step.
-It places one `terminal` slot over the whole page, and Hearthscale draws
-the person's own live shell there: the window opens the shell with its
-own authority and the person's keys reach it from the window, so they
-never pass through the app. The slot names the folder the shell starts
-in, which must lie inside a folder the person gave the app; until there
-is one, the page offers the folder pick (`roots` in `uses`).
-
-The slot's id names the shell in its tab: the same tab takes up the same
-shell while the platform holds it, and the shell ends with the tab.
-
-## Releasing
-
-Install the Hearthscale registry's GitHub App on this repository once. Then
-every release whose tag equals `version` in `app.json` is picked up by the
-Marketplace.
-
-```
-hearthscale pack .
-```
-
-builds the package to attach to the release.
-
-## Licence
-
-MIT. See `LICENSE`.
+- **A folder to start in.** The shell starts in a folder you gave the app.
+- **Your own access.** The commands you type run with your own access, as in any terminal, outside the sandbox of your apps' agents. What you type goes straight to the shell; the Terminal app never sees it.
