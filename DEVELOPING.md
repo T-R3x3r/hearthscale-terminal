@@ -27,7 +27,9 @@ in, which must lie inside a folder the person gave the app; until there
 is one, the page offers the folder pick (`roots` in `uses`).
 
 The slot's id names the shell in its tab: the same tab takes up the same
-shell while the platform holds it, and the shell ends with the tab.
+shell while the platform holds it, and the shell ends with the tab. The
+page names its tab after the folder the shell starts in, with
+`hearthscale/ui/set-tab`.
 
 ## Releasing
 

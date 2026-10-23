@@ -1,8 +1,9 @@
 /**
  * The Terminal app's page: the person's own live shell, which Hearthscale
  * draws over the whole page in a `terminal` slot and opens in a folder the
- * person gave the app. The page never sees what is typed there. Until the
- * person has given a folder, the page offers the folder pick.
+ * person gave the app. The page names its tab after that folder and never
+ * sees what is typed there. Until the person has given a folder, the page
+ * offers the folder pick.
  */
 import {
   App,
@@ -17,7 +18,7 @@ html, body, .terminal-root { height: 100%; margin: 0; }
 .hs-shell .hs-button:active .terminal-glyph { transform: var(--press); opacity: var(--press-fade); }
 `;
 
-const app = new App({ name: 'Terminal', version: '1.0.1' }, {}, { autoResize: false });
+const app = new App({ name: 'Terminal', version: '1.1.0' }, {}, { autoResize: false });
 
 /** One request of the host, its result whole. */
 const call = (method, params = {}) => app.request({ method, params }, Answer);
@@ -66,6 +67,15 @@ async function pick() {
   if (mount) show(mount.path);
 }
 
+/** Names the tab the page fills after the folder the shell starts in, or
+ *  gives back the surface's title while no folder is given. A page outside
+ *  a tab names nothing. */
+async function name(cwd) {
+  if (app.getHostContext()?.displayMode !== 'fullscreen') return;
+  const folder = cwd === null ? null : (cwd.split(/[\\/]/).filter(Boolean).pop() ?? cwd);
+  await call('hearthscale/ui/set-tab', { title: folder?.slice(0, 200) ?? null });
+}
+
 /** The shell in `cwd`, or the pick while no folder is given. */
 function show(cwd) {
   root.replaceChildren();
@@ -83,6 +93,7 @@ function show(cwd) {
     root.append(empty);
   }
   void place(cwd);
+  void name(cwd);
 }
 
 const style = document.createElement('style');
