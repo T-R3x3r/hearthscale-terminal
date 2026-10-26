@@ -67,13 +67,16 @@ async function pick() {
   if (mount) show(mount.path);
 }
 
+/** The longest title `hearthscale/ui/set-tab` takes. */
+const TAB_TITLE_CHARS = 200;
+
 /** Names the tab the page fills after the folder the shell starts in, or
  *  gives back the surface's title while no folder is given. A page outside
  *  a tab names nothing. */
 async function name(cwd) {
   if (app.getHostContext()?.displayMode !== 'fullscreen') return;
   const folder = cwd === null ? null : (cwd.split(/[\\/]/).filter(Boolean).pop() ?? cwd);
-  await call('hearthscale/ui/set-tab', { title: folder?.slice(0, 200) ?? null });
+  await call('hearthscale/ui/set-tab', { title: folder?.slice(0, TAB_TITLE_CHARS) ?? null });
 }
 
 /** The shell in `cwd`, or the pick while no folder is given. */
@@ -93,7 +96,8 @@ function show(cwd) {
     root.append(empty);
   }
   void place(cwd);
-  void name(cwd);
+  // A refusal leaves the tab the title it has.
+  name(cwd).catch(() => {});
 }
 
 const style = document.createElement('style');
