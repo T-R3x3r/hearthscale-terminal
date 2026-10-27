@@ -71,10 +71,8 @@ async function pick() {
 const TAB_TITLE_CHARS = 200;
 
 /** Names the tab the page fills after the folder the shell starts in, or
- *  gives back the surface's title while no folder is given. A page outside
- *  a tab names nothing. */
+ *  gives back the surface's title while no folder is given. */
 async function name(cwd) {
-  if (app.getHostContext()?.displayMode !== 'fullscreen') return;
   const folder = cwd === null ? null : (cwd.split(/[\\/]/).filter(Boolean).pop() ?? cwd);
   await call('hearthscale/ui/set-tab', { title: folder?.slice(0, TAB_TITLE_CHARS) ?? null });
 }
